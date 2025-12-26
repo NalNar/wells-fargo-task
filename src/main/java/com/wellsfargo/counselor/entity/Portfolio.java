@@ -7,34 +7,44 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 @Entity
-public class Portfolio{
+public class Portfolio {
+
     @Id
+    @GeneratedValue()
     private long portfolioId;
-    private long clientId;
-    private String securityDate;
 
-    protected Portfolio{}
+    @ManyToOne
+    private Client client;
 
-    public Portfolio(long clientId, String securityDate){
-        this.clientId = clientId;
-        this.securityDate = securityDate;
+    @Column(nullable = false)
+    private String creationDate;
+
+    protected Portfolio() {
+
     }
 
-    public long getId(){
+    public Portfolio(Client client, String creationDate) {
+        this.client = client;
+        this.creationDate = creationDate;
+    }
+
+    public Long getPortfolioId() {
         return portfolioId;
     }
 
-    public void setId(long Id){
-        portfolioId = Id;
+    public Client getCLient() {
+        return client;
     }
 
-    public long getClientId(){
-        return clientId;
-    }
-    
-    public String getSecurityDate(){
-        return securityDate;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
+    public String getCreationDate() {
+        return creationDate;
+    }
 
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 }
